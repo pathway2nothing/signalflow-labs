@@ -1,8 +1,8 @@
 # signalflow-nn Roadmap
 
-## Current State (v0.2.6)
+## Current State (v0.6.0)
 
-- 14 encoders: LSTM, GRU, Conv1d, TCN, InceptionTime, Transformer, PatchTST, ResNet1D, TSMixer, XceptionTime, XCM, gMLP, OmniScaleCNN, ConvTran
+- 16 encoders: LSTM, GRU, Conv1d, TCN, InceptionTime, Transformer, PatchTST, ResNet1D, TSMixer, XceptionTime, XCM, gMLP, OmniScaleCNN, ConvTran, iTransformer, Mamba
 - 7 heads: Linear, MLP, Residual, Attention, Ordinal, Distribution, Confidence
 - Data pipeline: TimeSeriesPreprocessor, SignalWindowDataset, SignalDataModule
 - Training: TemporalClassificator (Lightning), TemporalValidator
@@ -14,8 +14,8 @@
 
 ### New Architectures
 
-- [ ] **MambaEncoder** — State Space Model (Gu & Dao, 2023). Linear O(T) complexity vs O(T^2) transformers. Ideal for long sequences. Most SSM work is on forecasting — gap in classification
-- [ ] **iTransformerEncoder** — Inverted Transformer (ICLR 2024 Spotlight). Variates as tokens instead of timesteps. Captures cross-asset correlations in multivariate data
+- [x] **MambaEncoder** — State Space Model (Gu & Dao, 2023). Linear O(T) complexity vs O(T^2) transformers. Ideal for long sequences.
+- [x] **iTransformerEncoder** — Inverted Transformer (ICLR 2024 Spotlight). Variates as tokens instead of timesteps.
 - [ ] **TimesNetEncoder** — 2D periodicity-aware CNN (ICLR 2023). Transforms 1D series to 2D by detected periods, applies 2D conv. Natural fit for intraday/weekly/monthly cycles
 
 ### Data Augmentation Module
