@@ -1,4 +1,4 @@
-"""Torch MLP backend for the V5 ForecastModel (sklearn-compatible)."""
+"""Torch MLP backend for the ForecastModel (sklearn-compatible)."""
 
 
 import numpy as np

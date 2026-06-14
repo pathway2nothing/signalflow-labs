@@ -1,9 +1,9 @@
-"""Compatibility shims reproducing OLD-core symbols over the V5 core.
+"""Compatibility shims reproducing OLD-core symbols over the core.
 
-The labs code predates the V5 rewrite and imports symbols (``register``,
+The labs code predates the rewrite and imports symbols (``register``,
 ``validator``, ``SfTorchModuleMixin``, ``SfComponentType``, ``default_registry``,
 ``SignalValidator``, ``Signals``) that no longer exist in ``signalflow``. This
-module re-expresses each of them on top of the V5 ``registry`` and contracts so
+module re-expresses each of them on top of the ``registry`` and contracts so
 the neural-network modules keep registering and importing unchanged.
 """
 
@@ -23,7 +23,7 @@ default_registry = registry
 
 
 class SfComponentType:
-    """Old component-type names mapped onto the V5 ``ComponentType`` set."""
+    """Old component-type names mapped onto the ``ComponentType`` set."""
 
     TORCH_MODULE = ComponentType.MODEL
     VALIDATOR = ComponentType.MODEL
@@ -31,7 +31,7 @@ class SfComponentType:
 
 
 def register(name: str, *, override: bool = True) -> Callable[[T], T]:
-    """Register a neural component into the V5 registry under the MODEL type."""
+    """Register a neural component into the registry under the MODEL type."""
 
     def decorator(cls: T) -> T:
         cls._sf_name = name
@@ -43,7 +43,7 @@ def register(name: str, *, override: bool = True) -> Callable[[T], T]:
 
 
 def validator(name: str, **_kwargs: Any) -> Callable[[T], T]:
-    """Register a validator into the V5 registry, tolerating legacy kwargs."""
+    """Register a validator into the registry, tolerating legacy kwargs."""
 
     def decorator(cls: T) -> T:
         cls._sf_name = name
@@ -89,7 +89,7 @@ class SfTorchModuleMixin(ABC):
 
 
 class SignalValidator:
-    """Base validator usable as a V5 validator slot (meta-labeler)."""
+    """Base validator usable as a validator slot (meta-labeler)."""
 
     component_type = SfComponentType.VALIDATOR
     output = "p_success"
