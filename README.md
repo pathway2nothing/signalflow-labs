@@ -6,12 +6,12 @@
   <img alt="SignalFlow" src="assets/logo.png" width="120">
 </picture>
 
-# signalflow-nn
+# signalflow-labs
 
-**Neural network extension for SignalFlow - 14 encoders, 7 heads, 4 loss functions**
+**Neural-network & RL extension for SignalFlow - 14 encoders, 7 heads, 4 losses, RL strategy**
 
 <p>
-<a href="https://pypi.org/project/signalflow-nn/"><img src="https://img.shields.io/badge/version-0.6.0-7c3aed" alt="Version"></a>
+<a href="https://pypi.org/project/signalflow-labs/"><img src="https://img.shields.io/badge/version-0.8.1-7c3aed" alt="Version"></a>
 <a href="https://www.python.org/downloads/"><img src="https://img.shields.io/badge/python-3.12+-3b82f6?logo=python&logoColor=white" alt="Python 3.12+"></a>
 <img src="https://img.shields.io/badge/pytorch-ef4444?logo=pytorch&logoColor=white" alt="PyTorch">
 <img src="https://img.shields.io/badge/lightning-792ee5?logo=lightning&logoColor=white" alt="Lightning">
@@ -23,23 +23,29 @@
 
 Part of the [SignalFlow](https://github.com/pathway2nothing/sf-project) ecosystem.
 
-PyTorch/Lightning library for financial time series classification. Provides modular encoders, classification heads, and loss functions designed for trading signal validation and prediction.
+A V5 plugin: a PyTorch/Lightning library for financial time-series classification
+(modular encoders, classification heads, loss functions) plus a reinforcement-learning
+strategy. Installing it auto-registers its components with the core `signalflow`
+registry via entry points.
 
 ## Installation
 
 ```bash
-pip install signalflow-nn
+pip install signalflow-labs           # core: torch + lightning
+pip install "signalflow-labs[rl]"     # + stable-baselines3, gymnasium (RL strategy)
+# or, from the core:
+pip install "signalflow-trading[labs]"
 ```
 
-**Requires:** Python ≥ 3.12, signalflow-trading ≥ 0.5.0, PyTorch ≥ 2.2, Lightning ≥ 2.5
+**Requires:** Python ≥ 3.12, signalflow-trading ≥ 0.8.0, PyTorch ≥ 2.2, Lightning ≥ 2.5.
 
 ## Quick Start
 
 ```python
-from signalflow.nn.encoder import TransformerEncoder
-from signalflow.nn.head import MLPClassifierHead
-from signalflow.nn.model import TemporalClassificator
-from signalflow.nn.data import SignalDataModule
+from signalflow.labs.encoder import TransformerEncoder
+from signalflow.labs.head import MLPClassifierHead
+from signalflow.labs.model import TemporalClassificator
+from signalflow.labs.data import SignalDataModule
 import lightning as pl
 
 # Create model
@@ -106,33 +112,39 @@ trainer.fit(model, dm)
 
 ## SignalFlow Integration
 
-Use as a validator in the SignalFlow pipeline:
+Importing `signalflow.labs` registers its components. The RL strategy plugs into a
+`Flow` as the strategy slot (needs the `[rl]` extra):
 
 ```python
 import signalflow as sf
+import signalflow.labs as labs               # registers neural + RL components
+from stable_baselines3 import PPO
 
-result = (
-    sf.Backtest("nn_validated")
-    .data(raw=raw)
-    .detector("sma_cross", fast_period=20, slow_period=50)
-    .validator("nn/transformer", d_model=64, nhead=4)
-    .entry(size_pct=0.1)
-    .exit(tp=0.03, sl=0.015)
-    .run()
-)
+base = sf.Flow(name="rl", detectors=[sf.SmaCrossDetector()])
+env = labs.make_env(base, ds)                # gymnasium env over an Engine replay
+policy = PPO("MlpPolicy", env).learn(10_000)
+
+flow = base.replace(strategy=labs.RLStrategy(model=policy, size_pct=0.1))
+run = flow.backtest(ds, capital=50_000)
+print(run.scorecard())
 ```
+
+The neural `TemporalClassificator` can also back a `ForecastModel` for signal
+validation; see `signalflow.labs.validator`.
 
 ## Package Structure
 
 | Module | Description |
 |--------|-------------|
-| `signalflow.nn.data` | Data loading, windowing, temporal splitting |
-| `signalflow.nn.encoder` | 14 feature encoding architectures |
-| `signalflow.nn.head` | 7 output head architectures |
-| `signalflow.nn.layer` | Custom neural network layers |
-| `signalflow.nn.loss` | 4 specialized loss functions |
-| `signalflow.nn.model` | `TemporalClassificator` - complete model |
-| `signalflow.nn.validator` | SignalFlow validator integration |
+| `signalflow.labs.data` | Data loading, windowing, temporal splitting |
+| `signalflow.labs.encoder` | 14 feature encoding architectures |
+| `signalflow.labs.head` | 7 output head architectures |
+| `signalflow.labs.layer` | Custom neural network layers |
+| `signalflow.labs.loss` | 4 specialized loss functions |
+| `signalflow.labs.model` | `TemporalClassificator` - complete model |
+| `signalflow.labs.validator` | SignalFlow validator integration |
+| `signalflow.labs.strategy` | `RLStrategy` + `make_env` (RL) |
+| `signalflow.labs.backend` | `TorchMLPBackend` for `ForecastModel` |
 
 ---
 
