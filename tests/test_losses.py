@@ -4,10 +4,10 @@ import pytest
 import torch
 import torch.nn as nn
 
-from signalflow.nn.loss.dice import DiceLoss
-from signalflow.nn.loss.focal import FocalLoss
-from signalflow.nn.loss.ldam import LDAMLoss
-from signalflow.nn.loss.symmetric_ce import SymmetricCrossEntropyLoss
+from signalflow.labs.loss.dice import DiceLoss
+from signalflow.labs.loss.focal import FocalLoss
+from signalflow.labs.loss.ldam import LDAMLoss
+from signalflow.labs.loss.symmetric_ce import SymmetricCrossEntropyLoss
 
 NUM_CLASSES = 3
 BATCH_SIZE = 8
@@ -122,7 +122,7 @@ class TestDiceLoss:
 
     def test_smooth_prevents_nan(self):
         """Missing class in batch should not produce NaN."""
-        # All targets are class 0 — classes 1 and 2 are missing
+        # All targets are class 0 - classes 1 and 2 are missing
         targets = torch.zeros(BATCH_SIZE, dtype=torch.long)
         logits = torch.randn(BATCH_SIZE, NUM_CLASSES)
         loss_fn = DiceLoss(smooth=1.0)

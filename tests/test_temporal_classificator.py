@@ -3,7 +3,7 @@
 import pytest
 import torch
 
-from signalflow.nn.model.temporal_classificator import TemporalClassificator, TrainingConfig
+from signalflow.labs.model.temporal_classificator import TemporalClassificator, TrainingConfig
 
 
 @pytest.fixture

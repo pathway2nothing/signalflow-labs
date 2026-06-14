@@ -1,14 +1,14 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="../logo-dark.svg" width="120">
-  <source media="(prefers-color-scheme: light)" srcset="../logo.svg" width="120">
-  <img alt="SignalFlow" src="../logo.png" width="120">
+  <source media="(prefers-color-scheme: dark)" srcset="assets/logo-dark.svg" width="120">
+  <source media="(prefers-color-scheme: light)" srcset="assets/logo.svg" width="120">
+  <img alt="SignalFlow" src="assets/logo.png" width="120">
 </picture>
 
 # signalflow-nn
 
-**Neural network extension for SignalFlow — 14 encoders, 7 heads, 4 loss functions**
+**Neural network extension for SignalFlow - 14 encoders, 7 heads, 4 loss functions**
 
 <p>
 <a href="https://pypi.org/project/signalflow-nn/"><img src="https://img.shields.io/badge/version-0.6.0-7c3aed" alt="Version"></a>
@@ -99,7 +99,7 @@ trainer.fit(model, dm)
 
 | Loss | Purpose |
 |------|---------|
-| `FocalLoss` | Class imbalance — down-weights easy examples |
+| `FocalLoss` | Class imbalance - down-weights easy examples |
 | `DiceLoss` | Imbalanced multi-class |
 | `LDAMLoss` | Large margin for rare classes |
 | `SymmetricCrossEntropyLoss` | Noisy labels |
@@ -131,7 +131,7 @@ result = (
 | `signalflow.nn.head` | 7 output head architectures |
 | `signalflow.nn.layer` | Custom neural network layers |
 | `signalflow.nn.loss` | 4 specialized loss functions |
-| `signalflow.nn.model` | `TemporalClassificator` — complete model |
+| `signalflow.nn.model` | `TemporalClassificator` - complete model |
 | `signalflow.nn.validator` | SignalFlow validator integration |
 
 ---

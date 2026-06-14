@@ -6,7 +6,7 @@ import numpy as np
 import polars as pl
 import pytest
 
-from signalflow.nn.data.ts_preprocessor import ScalerConfig, TimeSeriesPreprocessor
+from signalflow.labs.data.ts_preprocessor import ScalerConfig, TimeSeriesPreprocessor
 
 
 @pytest.fixture

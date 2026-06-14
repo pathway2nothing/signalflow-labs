@@ -1,7 +1,7 @@
 """Tests for LSTM and GRU encoders."""
 
-from signalflow.nn.encoder.gru import GRUEncoder
-from signalflow.nn.encoder.lstm import LSTMEncoder
+from signalflow.labs.encoder.gru import GRUEncoder
+from signalflow.labs.encoder.lstm import LSTMEncoder
 
 
 class TestLSTMEncoder:
