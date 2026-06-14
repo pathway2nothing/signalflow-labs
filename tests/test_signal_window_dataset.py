@@ -5,7 +5,7 @@ import polars as pl
 import pytest
 import torch
 
-from signalflow.nn.data.signal_window_dataset import SignalWindowDataset
+from signalflow.labs.data.signal_window_dataset import SignalWindowDataset
 
 
 class TestSignalWindowDatasetInit:

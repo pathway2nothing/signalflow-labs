@@ -7,8 +7,8 @@ import polars as pl
 import pytest
 import torch
 
-from signalflow.nn.data.ts_preprocessor import ScalerConfig, TimeSeriesPreprocessor
-from signalflow.nn.validator.temporal_validator import TemporalValidator
+from signalflow.labs.data.ts_preprocessor import ScalerConfig, TimeSeriesPreprocessor
+from signalflow.labs.validator.temporal_validator import TemporalValidator
 
 
 @pytest.fixture

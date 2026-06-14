@@ -3,8 +3,8 @@
 import polars as pl
 import pytest
 
-from signalflow.nn.data.signal_data_module import SignalDataModule
-from signalflow.nn.data.ts_preprocessor import ScalerConfig, TimeSeriesPreprocessor
+from signalflow.labs.data.signal_data_module import SignalDataModule
+from signalflow.labs.data.ts_preprocessor import ScalerConfig, TimeSeriesPreprocessor
 
 
 @pytest.fixture
