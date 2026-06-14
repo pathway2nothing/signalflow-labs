@@ -1,7 +1,7 @@
-"""signalflow.labs - neural-network and RL extension plugin for SignalFlow V5.
+"""signalflow.labs - neural-network and RL extension plugin for SignalFlow.
 
 Importing this package registers its components (encoders, heads, the temporal
-classifier/validator, and the RL strategy) into the V5 registry. Each submodule
+classifier/validator, and the RL strategy) into the registry. Each submodule
 import is guarded so an unavailable optional dependency never breaks the import.
 """
 

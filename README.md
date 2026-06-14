@@ -11,7 +11,7 @@
 **Neural-network & RL extension for SignalFlow - 14 encoders, 7 heads, 4 losses, RL strategy**
 
 <p>
-<a href="https://pypi.org/project/signalflow-labs/"><img src="https://img.shields.io/badge/version-0.8.1-7c3aed" alt="Version"></a>
+<a href="https://pypi.org/project/signalflow-labs/"><img src="https://img.shields.io/badge/version-0.8.2-7c3aed" alt="Version"></a>
 <a href="https://www.python.org/downloads/"><img src="https://img.shields.io/badge/python-3.12+-3b82f6?logo=python&logoColor=white" alt="Python 3.12+"></a>
 <img src="https://img.shields.io/badge/pytorch-ef4444?logo=pytorch&logoColor=white" alt="PyTorch">
 <img src="https://img.shields.io/badge/lightning-792ee5?logo=lightning&logoColor=white" alt="Lightning">
@@ -23,7 +23,7 @@
 
 Part of the [SignalFlow](https://github.com/pathway2nothing/sf-project) ecosystem.
 
-A V5 plugin: a PyTorch/Lightning library for financial time-series classification
+A plugin: a PyTorch/Lightning library for financial time-series classification
 (modular encoders, classification heads, loss functions) plus a reinforcement-learning
 strategy. Installing it auto-registers its components with the core `signalflow`
 registry via entry points.
