@@ -1,3 +1,4 @@
+"""Signal data module for the temporal stack (parked; not V5-adapted)."""
 
 import os
 from dataclasses import dataclass, field

@@ -1,8 +1,10 @@
 """signalflow.labs - neural-network and RL extension plugin for SignalFlow.
 
-Importing this package registers its components (encoders, heads, the temporal
-classifier/validator, and the RL strategy) into the registry. Each submodule
-import is guarded so an unavailable optional dependency never breaks the import.
+Importing this package registers the RL strategy into the registry and exposes
+the neural building blocks (encoders, heads, losses) and the parked temporal
+stack as importable modules. Encoders and heads are bare ``nn.Module`` s, not
+model-contract components, so they are not registered. Each submodule import is
+guarded so an unavailable optional dependency never breaks the import.
 """
 
 from loguru import logger

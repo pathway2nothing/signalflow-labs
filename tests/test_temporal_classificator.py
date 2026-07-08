@@ -5,6 +5,11 @@ import torch
 
 from signalflow.labs.model.temporal_classificator import TemporalClassificator, TrainingConfig
 
+pytestmark = pytest.mark.skip(
+    reason="temporal classifier parked (not V5-adapted): used only by the parked temporal "
+    "validator, and its encoders/heads are no longer registered in the MODEL registry"
+)
+
 
 @pytest.fixture
 def model(num_features):

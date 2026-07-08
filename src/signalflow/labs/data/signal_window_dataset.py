@@ -1,3 +1,4 @@
+"""Windowed signal dataset for the temporal stack (parked; not V5-adapted)."""
 
 import numpy as np
 import polars as pl

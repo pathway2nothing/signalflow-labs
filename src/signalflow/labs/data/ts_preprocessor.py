@@ -1,3 +1,5 @@
+"""Time-series preprocessor for the temporal stack (parked; not V5-adapted)."""
+
 import pickle
 from dataclasses import dataclass
 
