@@ -106,7 +106,12 @@ def make_env(flow, data, reward: str = "log_equity_delta"):
 
     from signalflow.engine.broker import SimBroker
     from signalflow.engine.engine import Engine
-    from signalflow.flow.loop import _orders, enriched_signals
+    from signalflow.flow.loop import enriched_signals
+
+    try:
+        from signalflow.flow.loop import orders_from_intents
+    except ImportError:
+        from signalflow.flow.loop import _orders as orders_from_intents
 
     if reward != "log_equity_delta":
         raise ValueError(f"unsupported reward {reward!r}; only 'log_equity_delta' is implemented")
@@ -136,9 +141,12 @@ def make_env(flow, data, reward: str = "log_equity_delta"):
         def _build_signals(self) -> None:
             import polars as pl
 
-            from signalflow.flow.loop import _EMPTY_SIGNALS_SCHEMA
+            try:
+                from signalflow.flow.loop import EMPTY_SIGNALS_SCHEMA
+            except ImportError:
+                from signalflow.flow.loop import _EMPTY_SIGNALS_SCHEMA as EMPTY_SIGNALS_SCHEMA
 
-            self._empty_schema = _EMPTY_SIGNALS_SCHEMA
+            self._empty_schema = EMPTY_SIGNALS_SCHEMA
             signals = enriched_signals(self.flow, self.data)
             by_ts: dict = {}
             if signals.height:
@@ -179,7 +187,7 @@ def make_env(flow, data, reward: str = "log_equity_delta"):
 
             intents = action_to_intents(int(action), obs, self.size_pct)
             intents = self.flow.risk.clip(intents, snap, self._peak)
-            fills = self.broker.execute(_orders(intents, bar.prices, bar.ts), bar)
+            fills = self.broker.execute(orders_from_intents(intents, bar.prices, bar.ts), bar)
             self.engine.apply(fills)
 
             equity = self.engine.equity(bar.prices)

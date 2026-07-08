@@ -1,3 +1,9 @@
+"""Temporal signal validator (parked; not V5-adapted).
+
+Retained for reference only: reads ``signals.value`` while the compat ``Signals``
+exposes ``.frame``, implements no ``predict``, never sets ``_fitted``, and keys
+its data path on ``timestamp`` rather than ``ts``. Not registered; tests skipped.
+"""
 
 import pickle
 from dataclasses import dataclass, field

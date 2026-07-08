@@ -1,4 +1,8 @@
-"""Temporal signal classifier with configurable encoder and head."""
+"""Temporal signal classifier with configurable encoder and head (parked; not V5-adapted).
+
+Lightning module used only by the parked temporal validator. Not registered;
+tests skipped.
+"""
 
 
 from dataclasses import dataclass

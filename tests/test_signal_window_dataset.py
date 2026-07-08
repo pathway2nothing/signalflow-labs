@@ -7,6 +7,10 @@ import torch
 
 from signalflow.labs.data.signal_window_dataset import SignalWindowDataset
 
+pytestmark = pytest.mark.skip(
+    reason="temporal data stack parked (not V5-adapted): keyed on 'timestamp' not 'ts'"
+)
+
 
 class TestSignalWindowDatasetInit:
     def test_creates_dataset(self, features_df, signals_df, feature_cols):

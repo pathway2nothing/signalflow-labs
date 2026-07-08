@@ -31,24 +31,28 @@ class SfComponentType:
 
 
 def register(name: str, *, override: bool = True) -> Callable[[T], T]:
-    """Register a neural component into the registry under the MODEL type."""
+    """Tag a neural building block without registering it into the MODEL registry.
+
+    Encoders and heads are bare ``nn.Module`` s, not model-contract components
+    (``fit``/``predict(Dataset)``/``is_fitted``), so they no longer appear under
+    ``sf list model``. The name tag is kept for introspection; the classes stay
+    importable and usable as building blocks.
+    """
 
     def decorator(cls: T) -> T:
         cls._sf_name = name
         cls._sf_type = ComponentType.MODEL
-        registry.register(ComponentType.MODEL, name, cls, role="model", override=override)
         return cls
 
     return decorator
 
 
 def validator(name: str, **_kwargs: Any) -> Callable[[T], T]:
-    """Register a validator into the registry, tolerating legacy kwargs."""
+    """Tag a validator without registering it into the MODEL registry."""
 
     def decorator(cls: T) -> T:
         cls._sf_name = name
         cls._sf_type = ComponentType.MODEL
-        registry.register(ComponentType.MODEL, name, cls, role="validator", override=True)
         return cls
 
     return decorator

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "signalflow-labs"
-version = "0.8.2"
+version = "0.8.5"
 description = "Neural network and RL extension for signalflow (torch/lightning/SB3)."
 readme = "README.md"
 requires-python = ">=3.12"
