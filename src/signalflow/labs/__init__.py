@@ -9,6 +9,8 @@ guarded so an unavailable optional dependency never breaks the import.
 
 from loguru import logger
 
+SIGNALFLOW_PLUGIN_API = 1
+
 from signalflow.labs.backend import TorchMLPBackend
 
 _GUARDED = [
