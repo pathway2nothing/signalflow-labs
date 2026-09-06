@@ -6,9 +6,8 @@ for Multivariate Time Series Classification" (2021). arXiv:2009.04796.
 
 import torch
 import torch.nn as nn
-from signalflow.labs._compat import register
 
-from signalflow.labs._compat import SfTorchModuleMixin
+from signalflow.labs._compat import SfTorchModuleMixin, register
 
 
 @register("encoder/xcm")

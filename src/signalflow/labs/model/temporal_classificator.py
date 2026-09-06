@@ -11,9 +11,8 @@ from typing import Any, Literal
 import lightning as L
 import torch
 import torch.nn as nn
-from signalflow.labs._compat import register
 
-from signalflow.labs._compat import SfComponentType, SfTorchModuleMixin, default_registry
+from signalflow.labs._compat import SfComponentType, SfTorchModuleMixin, default_registry, register
 
 
 @dataclass

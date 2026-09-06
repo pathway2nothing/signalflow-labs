@@ -3,13 +3,13 @@
 import numpy as np
 import polars as pl
 import pytest
+from signalflow.engine.types import PortfolioSnapshot
+from signalflow.errors import ArtifactError, SchemaVersionError
+from signalflow.strategy.observation import OBSERVATION_SCHEMA_VERSION, Observation
 
 import signalflow as sf
 import signalflow.labs as labs
-from signalflow.engine.types import PortfolioSnapshot
-from signalflow.errors import ArtifactError, SchemaVersionError
 from signalflow.labs.strategy import RLStrategy, action_to_intents, make_env
-from signalflow.strategy.observation import OBSERVATION_SCHEMA_VERSION, Observation
 
 
 class _FixedPolicy:

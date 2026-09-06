@@ -7,9 +7,8 @@ Forecasting with Transformers" (2023). arXiv:2211.14730.
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from signalflow.labs._compat import register
 
-from signalflow.labs._compat import SfTorchModuleMixin
+from signalflow.labs._compat import SfTorchModuleMixin, register
 
 
 class PatchEmbedding(nn.Module):

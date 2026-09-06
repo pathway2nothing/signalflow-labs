@@ -13,7 +13,6 @@ from collections.abc import Callable
 from typing import Any, Literal, TypeVar
 
 import polars as pl
-
 from signalflow.enums import ComponentType
 from signalflow.registry import registry
 

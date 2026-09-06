@@ -45,7 +45,6 @@ class TorchMLPBackend:
         return self
 
     def _build(self, n_features: int) -> "object":
-        import torch
         from torch import nn
 
         layers: list = []

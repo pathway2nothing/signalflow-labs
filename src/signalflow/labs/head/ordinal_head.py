@@ -3,9 +3,8 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from signalflow.labs._compat import register
 
-from signalflow.labs._compat import SfTorchModuleMixin
+from signalflow.labs._compat import SfTorchModuleMixin, register
 
 
 @register("head/soft/ordinal")

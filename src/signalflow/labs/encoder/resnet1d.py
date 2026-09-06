@@ -6,9 +6,8 @@ Adapted from: He et al. "Deep Residual Learning for Image Recognition"
 
 import torch
 import torch.nn as nn
-from signalflow.labs._compat import register
 
-from signalflow.labs._compat import SfTorchModuleMixin
+from signalflow.labs._compat import SfTorchModuleMixin, register
 
 
 class ResidualBlock1d(nn.Module):

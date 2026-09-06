@@ -14,10 +14,8 @@ import lightning as L
 import polars as pl
 import torch
 from lightning.pytorch.callbacks import EarlyStopping, ModelCheckpoint
-from signalflow.labs._compat import validator
-from signalflow.labs._compat import SignalValidator
 
-from signalflow.labs._compat import Signals
+from signalflow.labs._compat import Signals, SignalValidator, validator
 from signalflow.labs.data.signal_data_module import SignalDataModule
 from signalflow.labs.data.signal_window_dataset import SignalWindowDataset
 from signalflow.labs.data.ts_preprocessor import TimeSeriesPreprocessor

@@ -30,13 +30,14 @@ importable from `signalflow.labs`.
 ## Installation
 
 ```bash
-pip install signalflow-labs           # core: torch + lightning
+pip install signalflow-labs           # core: torch
 pip install "signalflow-labs[rl]"     # + stable-baselines3, gymnasium (RLStrategy, make_env)
+pip install "signalflow-labs[temporal]"  # + lightning (parked temporal stack)
 # or, from the core:
 pip install "signalflow-trading[labs]"
 ```
 
-**Requires:** Python ≥ 3.12, signalflow-trading ≥ 0.8.5, PyTorch ≥ 2.2, Lightning ≥ 2.5.
+**Requires:** Python ≥ 3.12, signalflow-trading ≥ 0.8.5, PyTorch ≥ 2.2. Lightning ≥ 2.5 only with the `[temporal]` extra.
 
 ## What is live
 
@@ -58,7 +59,7 @@ ds = sf.data("synthetic", pairs=["BTCUSDT"], start="2023-01-01", interval="1h")
 model = sf.ForecastModel(
     backend=labs.TorchMLPBackend(hidden_sizes=(64, 32), epochs=50, lr=1e-3),
     target=sf.FixedHorizon(bars=12),
-    features=sf.FeaturePipe(sf.SMA(10), sf.SMA(20), sf.SMA(50)),
+    features=sf.FeaturePipeline(sf.SMA(10), sf.SMA(20), sf.SMA(50)),
 )
 model.fit(ds)
 

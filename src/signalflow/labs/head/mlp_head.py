@@ -4,9 +4,8 @@ from typing import Literal
 
 import torch
 import torch.nn as nn
-from signalflow.labs._compat import register
 
-from signalflow.labs._compat import SfTorchModuleMixin
+from signalflow.labs._compat import SfTorchModuleMixin, register
 
 
 @register("head/cls/mlp")

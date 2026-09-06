@@ -28,7 +28,6 @@ from dataclasses import dataclass
 
 import cloudpickle
 import numpy as np
-
 from signalflow.decorators import strategy
 from signalflow.engine.types import Intent
 from signalflow.enums import RISE, IntentKind, Side
@@ -191,15 +190,9 @@ def make_env(flow, data, reward: str = "log_equity_delta"):
     """Build the gymnasium training env over ``flow`` + ``data`` (Engine replay)."""
     import gymnasium as gym
     from gymnasium import spaces
-
     from signalflow.engine.broker import SimBroker
     from signalflow.engine.engine import Engine
-    from signalflow.flow.loop import enriched_signals
-
-    try:
-        from signalflow.flow.loop import orders_from_intents
-    except ImportError:
-        from signalflow.flow.loop import _orders as orders_from_intents
+    from signalflow.flow.loop import EMPTY_SIGNALS_SCHEMA, enriched_signals, orders_from_intents
 
     if reward != "log_equity_delta":
         raise ValueError(f"unsupported reward {reward!r}; only 'log_equity_delta' is implemented")
@@ -228,11 +221,6 @@ def make_env(flow, data, reward: str = "log_equity_delta"):
 
         def _build_signals(self) -> None:
             import polars as pl
-
-            try:
-                from signalflow.flow.loop import EMPTY_SIGNALS_SCHEMA
-            except ImportError:
-                from signalflow.flow.loop import _EMPTY_SIGNALS_SCHEMA as EMPTY_SIGNALS_SCHEMA
 
             self._empty_schema = EMPTY_SIGNALS_SCHEMA
             signals = enriched_signals(self.flow, self.data)
@@ -286,10 +274,7 @@ def make_env(flow, data, reward: str = "log_equity_delta"):
             self._i += 1
             terminated = False
             truncated = self._i >= len(self._bars)
-            if truncated:
-                next_vec = obs.to_vector() * 0.0
-            else:
-                next_vec = self._observation(self._bars[self._i]).to_vector()
+            next_vec = obs.to_vector() * 0.0 if truncated else self._observation(self._bars[self._i]).to_vector()
             info = {"equity": equity}
             return next_vec, float(reward), terminated, truncated, info
 

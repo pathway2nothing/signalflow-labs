@@ -6,9 +6,8 @@ Forecasting" (2023). arXiv:2303.06053.
 
 import torch
 import torch.nn as nn
-from signalflow.labs._compat import register
 
-from signalflow.labs._compat import SfTorchModuleMixin
+from signalflow.labs._compat import SfTorchModuleMixin, register
 
 
 class MixerBlock(nn.Module):

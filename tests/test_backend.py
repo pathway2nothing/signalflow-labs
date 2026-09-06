@@ -40,7 +40,7 @@ def test_forecast_model_with_torch_backend_and_flow_round_trip(ds, tmp_path):
     model = sf.ForecastModel(
         backend=TorchMLPBackend(hidden_sizes=(8,), epochs=2),
         target=sf.FixedHorizon(bars=12),
-        features=sf.FeaturePipe(sf.SMA(10), sf.SMA(20), sf.SMA(50)),
+        features=sf.FeaturePipeline(sf.SMA(10), sf.SMA(20), sf.SMA(50)),
     )
     model.fit(ds)
     assert model.is_fitted

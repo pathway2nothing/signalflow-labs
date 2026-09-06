@@ -11,10 +11,13 @@ requires-python = ">=3.12"
 dependencies = [
   "signalflow-trading>=0.8.0",
   "torch>=2.2",
-  "lightning>=2.5",
 ]
 
 [project.optional-dependencies]
+# Parked temporal stack (TemporalClassificator, TemporalValidator, SignalDataModule).
+temporal = [
+  "lightning>=2.5",
+]
 # Reinforcement-learning strategy (RLStrategy + flow env).
 rl = [
   "stable-baselines3>=2.0",
@@ -25,6 +28,7 @@ test = [
   "ruff>=0.8",
   "stable-baselines3>=2.0",
   "gymnasium>=0.29",
+  "lightning>=2.5",
 ]
 
 [tool.setuptools]
@@ -50,3 +54,6 @@ src = ["src"]
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "UP", "B", "SIM"]
 ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"src/signalflow/labs/__init__.py" = ["E402"]  # plugin API marker precedes the guarded imports
