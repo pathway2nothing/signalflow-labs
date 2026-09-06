@@ -10,7 +10,7 @@ from signalflow.labs import TorchMLPBackend
 
 @pytest.fixture(scope="module")
 def ds():
-    return sf.data("synthetic", pairs=["BTCUSDT", "ETHUSDT"], start="2023-01-01", end="2023-04-01", interval="1h")
+    return sf.dataset("synthetic", pairs=["BTCUSDT", "ETHUSDT"], start="2023-01-01", end="2023-04-01", interval="1h")
 
 
 def test_sklearn_surface_and_clone():

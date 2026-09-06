@@ -24,7 +24,7 @@ class _FixedPolicy:
 
 @pytest.fixture(scope="module")
 def ds():
-    return sf.data("synthetic", pairs=["BTCUSDT", "ETHUSDT"], start="2023-01-01", end="2023-02-01", interval="1h")
+    return sf.dataset("synthetic", pairs=["BTCUSDT", "ETHUSDT"], start="2023-01-01", end="2023-02-01", interval="1h")
 
 
 def _obs(signals: pl.DataFrame, equity: float = 10_000.0, positions=None) -> Observation:

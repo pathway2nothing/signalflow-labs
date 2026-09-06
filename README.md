@@ -54,7 +54,7 @@ and `flow.save` / `Flow.load` all work unchanged.
 import signalflow as sf
 import signalflow.labs as labs
 
-ds = sf.data("synthetic", pairs=["BTCUSDT"], start="2023-01-01", interval="1h")
+ds = sf.dataset("synthetic", pairs=["BTCUSDT"], start="2023-01-01", interval="1h")
 
 model = sf.ForecastModel(
     backend=labs.TorchMLPBackend(hidden_sizes=(64, 32), epochs=50, lr=1e-3),
